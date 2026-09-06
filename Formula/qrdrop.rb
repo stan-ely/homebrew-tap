@@ -4,8 +4,8 @@
 class Qrdrop < Formula
   desc "Send a file straight from one device to another, end-to-end encrypted"
   homepage "https://github.com/stan-ely/qrdrop"
-  url "https://registry.npmjs.org/qrdrop/-/qrdrop-0.3.1.tgz"
-  sha256 "cc3b652aa2096f0dda5a54184dc07f0e0e961fc8c5e86c4d7f6a98f872ba1d19"
+  url "https://registry.npmjs.org/qrdrop/-/qrdrop-0.4.0.tgz"
+  sha256 "e3e9c04316f7d371c36d14cdc21ea529ef1c7aa3d413528ae6f5ab01d0d76eb0"
   license "MIT"
 
   # Rather than vendoring a runtime: brew's node is well past the
