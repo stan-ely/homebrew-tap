@@ -2,10 +2,10 @@
 # Hand edits here are overwritten on the next release; change the
 # template in that workflow instead.
 cask "qrdrop-app" do
-  version "0.1.0"
-  sha256 "53981c53839322de67b71d20df914a0ec548a2dfcb3a261390ee21898a2841a0"
+  version "1.0.0"
+  sha256 "dbd3a4125db0479fe23ff49e9062adba7ed4198e36213eb709de36468853fc77"
 
-  url "https://github.com/stan-ely/qrdrop/releases/download/app-v0.1.0/qrdrop_0.1.0_aarch64.dmg",
+  url "https://github.com/stan-ely/qrdrop/releases/download/app-v1.0.0/qrdrop_1.0.0_aarch64.dmg",
       verified: "github.com/stan-ely/qrdrop/"
   name "qrdrop"
   desc "Send a file straight from one device to another, end-to-end encrypted"
