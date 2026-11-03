@@ -4,25 +4,34 @@
 class Qrdrop < Formula
   desc "Send a file straight from one device to another, end-to-end encrypted"
   homepage "https://github.com/stan-ely/qrdrop"
-  url "https://registry.npmjs.org/qrdrop/-/qrdrop-0.6.0.tgz"
-  sha256 "c2225097ed5c52ebe566d7a2c8b47013e08b56ee89aeee2a39457a7a3bd9d1e7"
+  version "0.7.0"
   license "MIT"
 
-  # Rather than vendoring a runtime: brew's node is well past the
-  # engines floor of 22, and a bundled Node is ~58 MB against a
-  # published tarball of about 660 kB.
-  depends_on "node"
+  # The Rust CLI, one binary per platform from the GitHub Release.
+  # Linux's is static (musl), so it runs on any distribution.
+  on_macos do
+    on_arm do
+      url "https://github.com/stan-ely/qrdrop/releases/download/v0.7.0/qrdrop-0.7.0-aarch64-apple-darwin.tar.gz"
+      sha256 "ac9bc98a102c31ff59f0751926377067561cfbfaade888885434f031e57b96fc"
+    end
+    on_intel do
+      url "https://github.com/stan-ely/qrdrop/releases/download/v0.7.0/qrdrop-0.7.0-x86_64-apple-darwin.tar.gz"
+      sha256 "aa68cbd918f9d50ea320591eadd55b59dd47bfcf2ddaa43fc55266d668fa73ac"
+    end
+  end
+  on_linux do
+    on_arm do
+      url "https://github.com/stan-ely/qrdrop/releases/download/v0.7.0/qrdrop-0.7.0-aarch64-unknown-linux-musl.tar.gz"
+      sha256 "cb71f7d319bdc65d2b8356094041b58fc0bf680343d3e592738ab371ea364728"
+    end
+    on_intel do
+      url "https://github.com/stan-ely/qrdrop/releases/download/v0.7.0/qrdrop-0.7.0-x86_64-unknown-linux-musl.tar.gz"
+      sha256 "33214394f7b905fe0ed173681faad89536947a3a604042d577402a3541a1c1d8"
+    end
+  end
 
   def install
-    # std_npm_args passes --ignore-scripts, which is safe here for a
-    # specific reason worth writing down: node-datachannel ships its
-    # native binary as eight per-platform npm packages that npm picks
-    # between using os/cpu, not as a postinstall that downloads one.
-    # If it ever goes back to prebuild-install, this formula breaks
-    # into a CLI that pairs and then cannot open a peer connection --
-    # the failure src/node/rtc.js writes its long error message for.
-    system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install "qrdrop"
   end
 
   test do
